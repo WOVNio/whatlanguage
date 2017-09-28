@@ -21,6 +21,7 @@ class WhatLanguage
     :hebrew => :he,
     :hungarian => :hu,
     :italian => :it,
+    # :japanese => :ja, # Does not work
     :korean => :ko,
     :norwegian => :no,
     :pinyin => :zh,
@@ -28,7 +29,8 @@ class WhatLanguage
     :portuguese => :pt,
     :russian => :ru,
     :spanish => :es,
-    :swedish => :sv
+    :swedish => :sv,
+    :vietnamese => :vi
   }
 
   @@data = {}
@@ -89,7 +91,7 @@ class WhatLanguage
 
   def self.filter_from_dictionary(filename)
     bf = BloominSimple.new(BITFIELD_WIDTH, &HASHER)
-    File.open(filename).each { |word| bf.add(word) }
+    File.open(filename, 'r:UTF-8').each { |word| bf.add(word) }
     bf
   end
 

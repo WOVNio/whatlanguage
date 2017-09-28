@@ -1,4 +1,4 @@
-require 'lib/whatlanguage'
+require './lib/whatlanguage'
 require 'benchmark'
 
 texts = []
@@ -25,6 +25,7 @@ texts << %q{En estado de máxima alertaen su nivel de crítico. Cinco detencione
 
 texts << %q{Fern- und Regionalzüge, aber auch die S-Bahnen in den Großstädten stehen still. Gerade hat die Kanzlerin die Ergebnisse des Energiegipfels mit der Wirtschaft, den Energieerzeugern und Verbraucherschützern referiert, die "sachliche Atmosphäre" gelobt. Da wird der Umweltminister von einem Journalisten an seinen Ausspruch vom "Wirtschaftsstalinisten" erinnert, mit dem er jüngst den BASF-Vorstandschef Jürgen Hambrecht belegt hat im Streit um die ehrgeizigen Ziele der deutschen Klimapolitik. Wie haben denn seine Beiträge in der Runde für eine sachliche Atmosphäre ausgesehen? Gabriel überlegt, aber die Kanzlerin ist schneller.}
 
+texts << %q{Lời khuyên ‘đáng giá ngàn vàng’ từ những tỷ phú bỏ học vì đam mê}
 #texts << %q{Deux autres personnes ont été arrêtées durant la nuit}
 #texts << %q{The links between the attempted car bombings in Glasgow and London are becoming clearer}
 #texts << %q{En estado de máxima alertaen su nivel de crítico}
@@ -41,10 +42,10 @@ puts Benchmark.measure {
 
 100.times do  
 texts.each { |text| 
-  lang = text.language.to_s.capitalize
-#  puts "#{text[0..18]}... is in #{lang}"
-#  puts @wl.process_text(text).sort_by{|a,b| b }.reverse.inspect
-#  puts "---"
+  lang = @wl.language(text).to_s.capitalize
+  puts "#{text[0..18]}... is in #{lang}"
+  puts @wl.process_text(text).sort_by{|a,b| b }.reverse.inspect
+  puts "---"
 }
 end
 
